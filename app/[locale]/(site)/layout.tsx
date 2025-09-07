@@ -26,6 +26,9 @@ export default async function RootLayout({
   const messages = await getMessages({ locale });
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/x-icon" href="/images/logo/favicon.png"></link>
+      </head>
       <body className={`dark:bg-black ${inter.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
         <ThemeProviderClient>

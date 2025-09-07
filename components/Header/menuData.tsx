@@ -1,80 +1,45 @@
+import { useState, useEffect } from "react";
 import { Menu } from "@/types/menu";
+import { useLocale, useTranslations } from "next-intl";
 
-const menuData: Menu[] = [
-  {
-    id: 1,
-    title: "Home",
-    newTab: false,
-    path: "/",
-  },
-  {
-    id: 2,
-    title: "Features",
-    newTab: false,
-    path: "/#features",
-  },
-  {
-    id: 2.1,
-    title: "Blog",
-    newTab: false,
-    path: "/blog",
-  },
-  {
-    id: 2.3,
-    title: "Docs",
-    newTab: false,
-    path: "/docs",
-  },
-  {
-    id: 3,
-    title: "Pages",
-    newTab: false,
-    submenu: [
+const useMenuData = () => {
+  const t = useTranslations("HeaderMenu")
+  const locale = useLocale();
+  
+  const menuData: Menu[] = [
       {
-        id: 31,
-        title: "Blog Grid",
+        id: 1,
+        title: t("home"),
         newTab: false,
-        path: "/blog",
+        path: `/${locale}/`,
       },
       {
-        id: 34,
-        title: "Sign In",
+        id: 2,
+        title: t("templates"),
         newTab: false,
-        path: "/auth/signin",
+        path: `/${locale}/templates`,
       },
       {
-        id: 35,
-        title: "Sign Up",
+        id: 2.1,
+        title: t("plans"),
         newTab: false,
-        path: "/auth/signup",
+        path: `/${locale}/plans`,
       },
       {
-        id: 35,
-        title: "Docs",
+        id: 2.3,
+        title: t("about"),
         newTab: false,
-        path: "/docs",
+        path: `/${locale}/about`,
       },
       {
-        id: 35.1,
-        title: "Support",
+        id: 2.4,
+        title: t("contact"),
         newTab: false,
-        path: "/support",
+        path: `/${locale}/contact`,
       },
-      {
-        id: 36,
-        title: "404",
-        newTab: false,
-        path: "/error",
-      },
-    ],
-  },
+    ]
 
-  {
-    id: 4,
-    title: "Support",
-    newTab: false,
-    path: "/support",
-  },
-];
+  return menuData;
+};
 
-export default menuData;
+export default useMenuData;

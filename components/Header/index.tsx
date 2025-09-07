@@ -5,15 +5,18 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import ThemeToggler from "./ThemeToggler";
-import menuData from "./menuData";
 import LanguageSwitcher from "../LanguageSwitcher";
+import useMenuData from "./menuData";
+import { useLocale, useTranslations } from "next-intl";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
-
+  const menuData = useMenuData();
   const pathUrl = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("HeaderMenu");
 
   // Sticky menu
   const handleStickyMenu = () => {
@@ -30,24 +33,24 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-99999 w-full py-7 ${
+      className={`fixed top-0 left-0 z-99999 w-full py-7 ${
         stickyMenu
           ? "bg-white py-4! shadow-sm transition duration-100 dark:bg-black"
           : ""
       }`}
     >
-      <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
+      <div className="max-w-c-1390 relative mx-auto items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
           <a href="/">
             <Image
-              src="/images/logo/logo-dark.png"
+              src="/images/logo/logo_light.png"
               alt="logo"
               width={119.03}
               height={30}
               className="hidden w-full dark:block"
             />
             <Image
-              src="/images/logo/logo-light.png"
+              src="/images/logo/logo_dark.png"
               alt="logo"
               width={119.03}
               height={30}
@@ -64,29 +67,29 @@ const Header = () => {
             <span className="relative block h-5.5 w-5.5 cursor-pointer">
               <span className="absolute right-0 block h-full w-full">
                 <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-0 duration-200 ease-in-out dark:bg-white ${
+                  className={`relative top-0 left-0 my-1 block h-0.5 rounded-sm bg-black delay-0 duration-200 ease-in-out dark:bg-white ${
                     !navigationOpen ? "w-full! delay-300" : "w-0"
                   }`}
                 ></span>
                 <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
-                    !navigationOpen ? "delay-400 w-full!" : "w-0"
+                  className={`relative top-0 left-0 my-1 block h-0.5 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white ${
+                    !navigationOpen ? "w-full! delay-400" : "w-0"
                   }`}
                 ></span>
                 <span
-                  className={`relative left-0 top-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
+                  className={`relative top-0 left-0 my-1 block h-0.5 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white ${
                     !navigationOpen ? "w-full! delay-500" : "w-0"
                   }`}
                 ></span>
               </span>
               <span className="du-block absolute right-0 h-full w-full rotate-45">
                 <span
-                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
+                  className={`absolute top-0 left-2.5 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
                     !navigationOpen ? "h-0! delay-0" : "h-full"
                   }`}
                 ></span>
                 <span
-                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white ${
+                  className={`absolute top-2.5 left-0 block h-0.5 w-full rounded-sm bg-black delay-400 duration-200 ease-in-out dark:bg-white ${
                     !navigationOpen ? "h-0! delay-200" : "h-0.5"
                   }`}
                 ></span>
@@ -100,7 +103,7 @@ const Header = () => {
         <div
           className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
             navigationOpen &&
-            "navbar visible! mt-4 h-auto max-h-[400px] rounded-md bg-white p-7.5 shadow-solid-5 dark:bg-blacksection xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
+            "navbar shadow-solid-5 dark:bg-blacksection visible! mt-4 h-auto max-h-[400px] rounded-md bg-white p-7.5 xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
           }`}
         >
           <nav>
@@ -111,12 +114,12 @@ const Header = () => {
                     <>
                       <button
                         onClick={() => setDropdownToggler(!dropdownToggler)}
-                        className="flex cursor-pointer items-center justify-between gap-3 hover:text-primary"
+                        className="hover:text-primary flex cursor-pointer items-center justify-between gap-3"
                       >
                         {menuItem.title}
                         <span>
                           <svg
-                            className="h-3 w-3 cursor-pointer fill-waterloo group-hover:fill-primary"
+                            className="fill-waterloo group-hover:fill-primary h-3 w-3 cursor-pointer"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
                           >
@@ -152,10 +155,27 @@ const Header = () => {
             </ul>
           </nav>
 
-          <div className="mt-7 flex items-center gap-6 xl:mt-0">
-            <ThemeToggler />
+          <div className="mt-7 flex flex-wrap items-center gap-6 max-sm:flex-col max-sm:items-start xl:mt-0">
+            <div className="flex items-center gap-4 max-sm:w-full">
+              <ThemeToggler />
+              <LanguageSwitcher />
+            </div>
 
-           <LanguageSwitcher/>
+            <div className="flex items-center gap-3 max-sm:w-full max-sm:justify-start">
+              <Link
+                href={`/${locale}/auth/signin`}
+                className="hover:text-primary flex items-center gap-1"
+              >
+                <span>{t("login")}</span>
+              </Link>
+
+              <Link
+                href={`/${locale}/auth/signup`}
+                className="hover:text-primary flex items-center gap-1"
+              >
+                <span>{t("register")}</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

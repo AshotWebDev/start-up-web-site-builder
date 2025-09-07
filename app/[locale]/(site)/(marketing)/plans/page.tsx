@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PricingPage() {
+function PlansPage() {
   return (
     <div>pricing</div>
   )
 }
 
-export default PricingPage
+export default PlansPage

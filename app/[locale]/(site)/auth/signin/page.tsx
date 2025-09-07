@@ -1,19 +1,22 @@
 import Signin from "@/components/Auth/Signin";
+import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Login Page - Solid SaaS Boilerplate",
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "LoginPage" });
 
-  // other metadata
-  description: "This is Login page for Startup Pro"
-};
+  return {
+    title: t("metaData.title"),
+    description: t("metaData.description"),
+  };
+}
 
 const SigninPage = () => {
-  return (
-    <>
-      <Signin />
-    </>
-  );
+  return <Signin />;
 };
 
 export default SigninPage;

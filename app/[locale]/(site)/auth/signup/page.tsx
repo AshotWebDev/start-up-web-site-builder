@@ -1,12 +1,19 @@
 import Signup from "@/components/Auth/Signup";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Sign Up Page - Solid SaaS Boilerplate",
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "RegisterPage" });
 
-  // other metadata
-  description: "This is Sign Up page for Startup Pro"
-};
+  return {
+    title: t("metaData.title"),
+    description: t("metaData.description"),
+  };
+}
 
 export default function Register() {
   return (

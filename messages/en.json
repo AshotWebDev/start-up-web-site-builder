@@ -1,5 +1,62 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "HeaderMenu": {
+    "home": "Home",
+    "templates": "Templates",
+    "plans": "Plans",
+    "about": "About",
+    "contact": "Contact",
+    "login": "SignIn",
+    "register": "SignUp"
+  },
+
+  "buttons": [
+    "Sign In",
+    "Sign Up",
+    "SignIn with Google",
+    "SignIn with GitHub",
+    "SignUp with Google",
+    "SignUp with GitHub",
+    "Signing in..."
+  ],
+
+  "formErrors": [
+    "Invalid email address",
+    "Email is required",
+    "Password must be at least 6 characters",
+    "Password is required",
+    "You must accept Keep me signed in",
+    "First name is required",
+    "Last name is required"
+  ],
+
+  "placeholders": ["First Name", "Last Name", "Email", "Password"],
+
+  "Languages": {
+    "en": "English",
+    "ru": "Russian",
+    "am": "Armenian"
+  },
+
+  "LoginPage": {
+    "metaData": {
+      "title": "Login Page - A&V Sites",
+      "description": "This is a login page for A&V Sites"
+    },
+    "title": "Login to Your Account",
+    "text": "Or, login with your email",
+    "keepSignedIn": "Keep me signed in",
+    "forgotPassword": "Forgot password?",
+    "dontHaveAccount": "Don't have an account?"
+  },
+
+  "RegisterPage": {
+    "metaData": {
+      "title": "Register Page - A&V Sites",
+      "description": "This is the registration page for A&V Sites"
+    },
+    "title": "Create an Account",
+    "text": "Or register with your email",
+    "keepSignedIn": "Stay signed in",
+    "alreadyHaveAccount": "Already have an account"
   }
 }
