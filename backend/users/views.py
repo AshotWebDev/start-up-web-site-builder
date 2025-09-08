@@ -1,8 +1,14 @@
 from rest_framework import generics, permissions, status
-from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
+from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+
+from .serializers import (
+    RegisterSerializer,
+    UserSerializer,
+    UserUpdateSerializer,
+    ChangePasswordSerializer,
+)
 
 User = get_user_model()
 
@@ -16,7 +22,7 @@ class MeView(generics.RetrieveUpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_serializer_class(self):
-        if self.request.method in ['PATCH', 'PUT']:
+        if self.request.method in ('PUT', 'PATCH'):
             return UserUpdateSerializer
         return UserSerializer
 
@@ -33,3 +39,10 @@ class ChangePasswordView(APIView):
         serializer.save()
         return Response({"detail": "Пароль успешно изменён"}, status=status.HTTP_200_OK)
 
+
+class DeleteMeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        request.user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

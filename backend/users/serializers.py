@@ -7,7 +7,7 @@ User = get_user_model()
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=6)
-    tokens = serializers.SerializerMethodField()
+    tokens = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -16,19 +16,17 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def get_tokens(self, obj):
         refresh = RefreshToken.for_user(obj)
-        return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token)
-        }
+        return {'refresh': str(refresh), 'access': str(refresh.access_token)}
 
     def create(self, validated_data):
-        return User.objects.create_user(
+        user = User.objects.create_user(
             email=validated_data['email'],
+            password=validated_data['password'],
             first_name=validated_data.get('first_name', ''),
             last_name=validated_data.get('last_name', ''),
-            password=validated_data['password'],
             tariff_plan=validated_data.get('tariff_plan')
         )
+        return user
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -37,9 +35,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'first_name', 'last_name', 'tariff_plan')
 
 
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'tariff_plan')
+
+
 class ChangePasswordSerializer(serializers.Serializer):
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True, min_length=6)
+    old_password = serializers.CharField(write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True, min_length=6)
 
     def validate_old_password(self, value):
         user = self.context['request'].user
@@ -47,17 +51,8 @@ class ChangePasswordSerializer(serializers.Serializer):
             raise serializers.ValidationError("Старый пароль указан неверно")
         return value
 
-    def validate_new_password(self, value):
-        # тут можно добавить кастомную проверку сложности
-        return value
-
     def save(self, **kwargs):
         user = self.context['request'].user
         user.set_password(self.validated_data['new_password'])
         user.save()
         return user
-
-class UserUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'tariff_plan')
