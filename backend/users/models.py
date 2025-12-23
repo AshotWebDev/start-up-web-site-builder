@@ -23,13 +23,14 @@ class UserManager(BaseUserManager):
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser должен иметь is_staff=True")
+
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser должен иметь is_superuser=True")
 
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -37,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)  # 🔹 важно для админки
+    email_verified = models.BooleanField(default=False)
 
     objects = UserManager()
 

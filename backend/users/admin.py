@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import CustomUser
 
 
-@admin.register(User)
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    model = User
+    model = CustomUser
     list_display = ("email", "first_name", "last_name", "tariff_plan", "is_staff", "is_superuser")
     list_filter = ("is_staff", "is_superuser", "is_active")
 
