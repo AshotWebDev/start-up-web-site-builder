@@ -22,7 +22,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'tokens')
 
     def validate_email(self, value):
-        if not validate_email(value, verify=True):
+        if not validate_email(value, verify=False):
             raise serializers.ValidationError("Пожалуйста, укажите существующий адрес электронной почты.")
         if User.objects.filter(email=value).exists():
             raise serializers.ValidationError("Пользователь с таким email уже существует.")

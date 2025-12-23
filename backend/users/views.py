@@ -3,8 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 
 from .serializers import (
     RegisterSerializer,
@@ -67,5 +66,21 @@ class VerifyEmailView(APIView):
             return Response({'error': 'Неверный или просроченный токен'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LoginView(TokenObtainPairView):
-    serializer_class = LoginSerializer
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.validated_data['user']
+        refresh = RefreshToken.for_user(user)
+
+        return Response({
+            "user": UserSerializer(user).data,
+            "tokens": {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            }
+        }, status=status.HTTP_200_OK)
