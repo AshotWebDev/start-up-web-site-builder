@@ -1,48 +1,49 @@
+import { useTranslations } from "next-intl";
 import { Feature } from "@/types/feature";
 
-const featuresData: Feature[] = [
-  {
-    id: 1,
-    icon: "/images/icon/icon-01.svg",
-    title: "Crafted for SaaS",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-  {
-    id: 2,
-    icon: "/images/icon/icon-02.svg",
-    title: "High-quality Design",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-  {
-    id: 3,
-    icon: "/images/icon/icon-03.svg",
-    title: "Next.js 13 + TypeScript",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-  {
-    id: 4,
-    icon: "/images/icon/icon-04.svg",
-    title: "Sanity Blog and Docs",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-  {
-    id: 5,
-    icon: "/images/icon/icon-05.svg",
-    title: "DB, Auth and Stripe",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-  {
-    id: 6,
-    icon: "/images/icon/icon-06.svg",
-    title: "Regular Free Updates",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
-  },
-];
+const useFeaturesData = (): Feature[] => {
+  const t = useTranslations("HomePage.ourFeatures");
 
-export default featuresData;
+  const featuresData: Feature[] = [
+    {
+      id: 1,
+      icon: "/images/icon/templates.svg",
+      title: t("features.0.title"),
+      description: t("features.0.description"),
+    },
+    {
+      id: 2,
+      icon: "/images/icon/subscription.svg",
+      title: t("features.1.title"),
+      description: t("features.1.description"),
+    },
+    {
+      id: 3,
+      icon: "/images/icon/dashboard.svg",
+      title: t("features.2.title"),
+      description: t("features.2.description"),
+    },
+    {
+      id: 4,
+      icon: "/images/icon/customize.svg",
+      title: t("features.3.title"),
+      description: t("features.3.description"),
+    },
+    {
+      id: 5,
+      icon: "/images/icon/preferences.svg",
+      title: t("features.4.title"),
+      description: t("features.4.description"),
+    },
+    {
+      id: 6,
+      icon: "/images/icon/icon-06.svg",
+      title: t("features.5.title"),
+      description: t("features.5.description"),
+    },
+  ];
+
+  return featuresData;
+};
+
+export default useFeaturesData;

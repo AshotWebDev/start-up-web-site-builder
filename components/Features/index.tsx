@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
-import featuresData from "./featuresData";
 import SingleFeature from "./SingleFeature";
 import SectionHeader from "../Common/SectionHeader";
+import { useTranslations } from "next-intl";
+import useFeaturesData from "./featuresData";
 
 const Feature = () => {
+  const t = useTranslations()
+  const featuresData = useFeaturesData();
   return (
     <>
       {/* <!-- ===== Features Start ===== --> */}
@@ -13,11 +16,8 @@ const Feature = () => {
           {/* <!-- Section Title Start --> */}
           <SectionHeader
             headerInfo={{
-              title: "SOLID FEATURES",
-              subtitle: "Core Features of Solid",
-              description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam
-            ante in maximus.`,
+              title: t("HomePage.ourFeatures.title"),
+              subtitle: t("HomePage.ourFeatures.subTitle"),
             }}
           />
           {/* <!-- Section Title End --> */}

@@ -13,6 +13,7 @@ import ToasterContext from "../../context/ToastContext";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import ThemeProviderClient from "@/components/ThemeProviderClient";
+import StoreProvider from "@/app/StoreProvider/StoreProvider";
 
 export default async function RootLayout({
   children,
@@ -21,24 +22,28 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-
   const { locale } = await params;
   const messages = await getMessages({ locale });
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/x-icon" href="/images/logo/favicon.png"></link>
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="/images/logo/favicon.png"
+        ></link>
       </head>
       <body className={`dark:bg-black ${inter.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-        <ThemeProviderClient>
-          {/* <Lines /> */}
-          <Header />
-          <ToasterContext />
-          {children}
-          <Footer />
-          <ScrollToTop />
-        </ThemeProviderClient>
+          <ThemeProviderClient>
+            <StoreProvider>
+              <Header />
+              <ToasterContext />
+              {children}
+              <Footer />
+            </StoreProvider>
+            <ScrollToTop />
+          </ThemeProviderClient>
         </NextIntlClientProvider>
       </body>
     </html>

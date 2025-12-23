@@ -1,30 +1,30 @@
-import { FeatureTab } from "@/types/featureTab";
-
-const featuresTabData: FeatureTab[] = [
+// featuresTabs.js
+export const getFeaturesTabs = (t) => [
   {
-    id: "tabOne",
-    title: "Solid Has Neat & Clean User Interface.",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `    Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
-    image: "/images/features/features-light-01.png",
-    imageDark: "/images/features/features-dark-01.svg",
+    id: '1',
+    tabId: 'tabOne',
+    title: t("featuresTabSection.tabs.tab1.title"),
+    subTitle: t("featuresTabSection.tabs.tab1.subTitle"),
+    description: t("featuresTabSection.tabs.tab1.description"),
+    img: "/images/features/featuresTab1Img.png",
+    illustrationText: t("featuresTabSection.tabs.tab1.illustrationText"),
   },
   {
-    id: "tabTwo",
-    title: "Ready to Use Pages You Need for a SaaS Business.",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `    Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
-    image: "/images/features/features-light-01.png",
-    imageDark: "/images/features/features-dark-01.svg",
+    id: '2',
+    tabId: 'tabTwo',
+    title: t("featuresTabSection.tabs.tab2.title"),
+    subTitle: t("featuresTabSection.tabs.tab2.subTitle"),
+    description: t("featuresTabSection.tabs.tab2.description"),
+    img: "/images/features/featuresTab2Img.png",
+    illustrationText: t("featuresTabSection.tabs.tab2.illustrationText"),
   },
   {
-    id: "tabThree",
-    title: "Functional Blog, DB, Auth and Many More",
-    desc1: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies lacus non fermentum ultrices. Fusce consectetur le.`,
-    desc2: `Nam id eleifend dui, id iaculis purus. Etiam lobortis neque nec finibus sagittis. Nulla ligula nunc egestas ut.`,
-    image: "/images/features/features-light-01.png",
-    imageDark: "/images/features/features-dark-01.svg",
+    id: '3',
+    tabId: 'tabThree',
+    title: t("featuresTabSection.tabs.tab3.title"),
+    subTitle: t("featuresTabSection.tabs.tab3.subTitle"),
+    description: t("featuresTabSection.tabs.tab3.description"),
+    img: "/images/features/featuresTab3Img.png",
+    illustrationText: t("featuresTabSection.tabs.tab3.illustrationText"),
   },
 ];
-
-export default featuresTabData;
