@@ -1,0 +1,26 @@
+# =============================================================================
+# Django — основные настройки
+# =============================================================================
+
+# ОБЯЗАТЕЛЬНО сгенерируй новый ключ!
+DJANGO_SECRET_KEY=django-insecure-c(19t&=+)&s%1f*!w%(df*owm-nujx!yn!57zz4c08s+ce7ixi
+
+DEBUG=False
+
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,*.yourdomain.com
+
+# Безопасность (в продакшене включишь True после HTTPS)
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
+SECURE_HSTS_SECONDS=0
+
+# Celery
+CELERY_BROKER_URL=redis://redis:6379/0
+CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+# Твои кастомные переменные для генерации сайтов
+TEMPLATES_DIR=/app/templates
+SITES_DIR=/app/generated-sites
+GENERATED_SITES_HOST_PORT_PREFIX=8100
+BASE_DOMAIN=yourdomain.com
