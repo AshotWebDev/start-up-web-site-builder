@@ -10,22 +10,39 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from datetime import timedelta
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Путь к .env файлам
+ENV_DIR = BASE_DIR / ".envs" / ".local"
+
+# Загружаем сначала postgres, потом django (django может переопределять)
+load_dotenv(ENV_DIR / ".postgres")
+load_dotenv(ENV_DIR / ".django")
+
+# Удобная функция для чтения переменных
+def env(key, default=None, cast=str):
+    value = os.getenv(key)
+    if value is None:
+        return default
+    if cast == bool:
+        return value.lower() in ("true", "1", "yes", "t")
+    return cast(value)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c(19t&=+)&s%1f*!w%(df*owm-nujx!yn!57zz4c08s+ce7ixi'
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [h.strip() for h in env("DJANGO_ALLOWED_HOSTS", "localhost").split(",")]
 
 
 # Application definition
@@ -77,12 +94,19 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST", "localhost"),
+        "PORT": env("POSTGRES_PORT", "5432"),
     }
 }
 
+# Celery
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

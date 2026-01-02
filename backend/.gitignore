@@ -1,0 +1,9 @@
+# Environment variables
+.env
+.envs/*
+!.envs/.local/
+!.envs/.local/.django.example
+!.envs/.local/.postgres.example
+
+# Но сами файлы .local не коммитим
+.envs/.local/*
