@@ -58,9 +58,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'create_site',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ← должен быть ОЧЕНЬ ВЫСОКО (почти первым)
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,6 +72,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Разрешаем все на этапе разработки (потом ужесточай)
+CORS_ALLOW_ALL_ORIGINS = True                   # ← временно для теста
+
+# Или конкретно (лучше):
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://your-domain.com",  # если есть
+]
+
+CORS_ALLOW_CREDENTIALS = True                   # если используешь cookies/auth
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -149,7 +164,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.CustomUser'  # кастомная модель пользователя
+AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
