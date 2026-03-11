@@ -44,6 +44,7 @@ services:
     command: celery -A backend worker -l info   # ← если ваш celery app называется иначе — поправьте
     volumes:
       - .:/backend
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - POSTGRES_DB=sitebuilder_db
       - POSTGRES_USER=vardan1444
@@ -52,6 +53,7 @@ services:
       - POSTGRES_PORT=5432
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DOCKER_HOST=unix:///var/run/docker.sock
     depends_on:
       - db
       - redis
