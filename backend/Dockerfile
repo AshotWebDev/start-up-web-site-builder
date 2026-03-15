@@ -4,6 +4,8 @@ FROM python:3.11
 # Рабочая директория внутри контейнера
 WORKDIR /backend
 
+RUN apt-get update && apt-get install -y docker-compose docker.io
+
 # Копируем и устанавливаем зависимости
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

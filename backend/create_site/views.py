@@ -13,4 +13,4 @@ class SiteCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         site = serializer.save(status="pending")
-        build_site_task.delay(site.id)
+        build_site_task.delay(site.domain)

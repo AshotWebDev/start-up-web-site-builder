@@ -60,7 +60,7 @@ def build_site_task(self, domain, template_name='next_saas', **kwargs):
             shutil.rmtree(site_path, ignore_errors=True)
 
         logger.info("Starting copytree...")
-        shutil.copytree(template_path, site_path)
+        shutil.copytree(template_path, site_path, dirs_exist_ok=True)
         logger.info("Copytree completed successfully")
 
         logger.info("Preparing to run docker compose...")

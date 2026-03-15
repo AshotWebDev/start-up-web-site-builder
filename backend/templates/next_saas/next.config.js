@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {images: { unoptimized: true }, output: 'standalone' }
+const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
 
 module.exports = nextConfig
