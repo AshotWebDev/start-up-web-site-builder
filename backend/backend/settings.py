@@ -180,7 +180,7 @@ EMAIL_HOST_USER = 'vardan.gevv@gmail.com'
 EMAIL_HOST_PASSWORD = 'sevagspbhlzhsebw'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-FRONTEND_URL = 'http://127.0.0.1:8000/api/v1'  # или твой домен
+FRONTEND_URL = 'http://127.0.0.1:3000'  # или твой домен
 
 
 SIMPLE_JWT = {

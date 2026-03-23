@@ -3,11 +3,12 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
-# backend-ը copy չենք անում, քանի որ այն առանձին կլինի
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+# Запуск dev-сервера с доступом из хоста (обязательно для Docker)
+CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]

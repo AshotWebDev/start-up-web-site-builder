@@ -43,7 +43,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
         # Создаём токен для подтверждения email
-        token = RefreshToken.for_user(user).access_token
+        refresh = RefreshToken.for_user(user)
+        token = str(refresh)
         verify_url = f"{settings.FRONTEND_URL}/auth/verify-email/?token={token}"
 
         # Отправляем письмо
@@ -60,7 +61,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'first_name', 'last_name', 'tariff_plan')
+        fields = ('id', 'email', 'first_name', 'last_name', 'tariff_plan', 'email_verified')
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
@@ -100,8 +101,8 @@ class LoginSerializer(serializers.Serializer):
         if user is None:
             raise AuthenticationFailed('Пользователь не найден.')
 
-        if not user.email_verified:
-            raise AuthenticationFailed('Почта не подтверждена. Проверьте вашу почту.')
+        # if not user.email_verified:
+        #     raise AuthenticationFailed('Почта не подтверждена. Проверьте вашу почту.')
 
         user = authenticate(username=user.email, password=password)
         if not user:

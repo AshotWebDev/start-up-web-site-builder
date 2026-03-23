@@ -53,7 +53,7 @@ export const usersApi = createApi({
     // REGISTER user
     registerUser: build.mutation<User, RegisterUserPayload>({
       query: (userData) => ({
-        url: '/v1/auth/register/',
+        url: 'api/v1/auth/register/',
         method: 'POST',
         body: userData,
       }),

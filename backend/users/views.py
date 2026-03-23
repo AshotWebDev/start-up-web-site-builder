@@ -50,18 +50,53 @@ class DeleteMeView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# class VerifyEmailView(APIView):
+#     permission_classes = [AllowAny]
+#
+#     def get(self, request):
+#         token = request.GET.get('token')
+#
+#         try:
+#             access_token = AccessToken(token)
+#             user = User.objects.get(id=access_token['user_id'])
+#             user.email_verified = True
+#             user.save()
+#             return Response({'message': 'Email подтвержден!'}, status=status.HTTP_200_OK)
+#         except Exception as e:
+#             return Response({'error': 'Неверный или просроченный токен'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class VerifyEmailView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
         token = request.GET.get('token')
+        if not token:
+            return Response({'error': 'Токен отсутствует'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            access_token = AccessToken(token)
-            user = User.objects.get(id=access_token['user_id'])
+            # Используем RefreshToken (долгоживущий)
+            refresh = RefreshToken(token)
+            user_id = refresh.payload['user_id']
+            user = User.objects.get(id=user_id)
+
+            if user.email_verified:
+                return Response({'message': 'Почта уже подтверждена'}, status=status.HTTP_200_OK)
+
             user.email_verified = True
             user.save()
-            return Response({'message': 'Email подтвержден!'}, status=status.HTTP_200_OK)
+
+            # === ВОЗВРАЩАЕМ НОВЫЕ ТОКЕНЫ И ПОЛЬЗОВАТЕЛЯ ===
+            new_refresh = RefreshToken.for_user(user)
+            return Response({
+                'message': 'Email успешно подтверждён!',
+                'user': UserSerializer(user).data,
+                'tokens': {
+                    'refresh': str(new_refresh),
+                    'access': str(new_refresh.access_token),
+                }
+            }, status=status.HTTP_200_OK)
+
         except Exception as e:
             return Response({'error': 'Неверный или просроченный токен'}, status=status.HTTP_400_BAD_REQUEST)
 

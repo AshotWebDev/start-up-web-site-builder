@@ -3,15 +3,16 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
-}): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "RegisterPage" });
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'RegisterPage' });
 
   return {
-    title: t("metaData.title"),
-    description: t("metaData.description"),
+    title: t('metaData.title'),
+    description: t('metaData.description'),
   };
 }
 

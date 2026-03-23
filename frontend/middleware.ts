@@ -32,7 +32,7 @@ export function middleware(req: NextRequest) {
   console.log("Host:", host);
 
   const site = sites.find((s) => s.domain === host);
-  console.log(site, "555");
+  // console.log(site, "555");
 
   if (site) {
     return NextResponse.rewrite(
