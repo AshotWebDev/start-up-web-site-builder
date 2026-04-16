@@ -11,8 +11,8 @@ ALLOWED_TEMPLATES = (
 class SiteCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Site
-        fields = ("id", "name", "domain", "template", "status")
-        read_only_fields = ("id", "status")
+        # Убрали status, добавили owner_id в read_only
+        fields = ("id", "name", "domain", "template")
 
     def validate_template(self, value):
         if value not in ALLOWED_TEMPLATES:

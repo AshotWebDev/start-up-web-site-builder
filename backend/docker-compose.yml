@@ -11,11 +11,11 @@ services:
       - "5432:5432"
     restart: unless-stopped
 
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    restart: unless-stopped
+#  redis:
+#    image: redis:7-alpine
+#    ports:
+#      - "6379:6379"
+#    restart: unless-stopped
 
   web:
     build: .
@@ -34,28 +34,28 @@ services:
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
     depends_on:
       - db
-      - redis
+#      - redis
     restart: unless-stopped
 
-  celery:
-    build: .
-    command: celery -A backend worker -l info
-    volumes:
-      - .:/backend
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - POSTGRES_DB=sitebuilder_db
-      - POSTGRES_USER=vardan1444
-      - POSTGRES_PASSWORD=Zibilanoc3!
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - DOCKER_HOST=unix:///var/run/docker.sock
-    depends_on:
-      - db
-      - redis
-    restart: unless-stopped
+#  celery:
+#    build: .
+#    command: celery -A backend worker -l info
+#    volumes:
+#      - .:/backend
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    environment:
+#      - POSTGRES_DB=sitebuilder_db
+#      - POSTGRES_USER=vardan1444
+#      - POSTGRES_PASSWORD=Zibilanoc3!
+#      - POSTGRES_HOST=db
+#      - POSTGRES_PORT=5432
+#      - CELERY_BROKER_URL=redis://redis:6379/0
+#      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+#      - DOCKER_HOST=unix:///var/run/docker.sock
+#    depends_on:
+#      - db
+#      - redis
+#    restart: unless-stopped
 
   # ==================== НОВЫЙ СЕРВИС ФРОНТЕНД ====================
   frontend:

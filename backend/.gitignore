@@ -7,3 +7,5 @@
 
 # Но сами файлы .local не коммитим
 .envs/.local/*
+
+generated-sites/
