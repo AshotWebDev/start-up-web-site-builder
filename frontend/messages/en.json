@@ -1,0 +1,192 @@
+{
+  "HeaderMenu": {
+    "home": "Home",
+    "templates": "Templates",
+    "plans": "Plans",
+    "about": "About",
+    "contact": "Contact",
+    "login": "SignIn",
+    "register": "SignUp"
+  },
+
+  "buttons": [
+    "Sign In",
+    "Sign Up",
+    "SignIn with Google",
+    "SignIn with GitHub",
+    "SignUp with Google",
+    "SignUp with GitHub",
+    "Signing in...",
+    "Start Now"
+  ],
+
+  "formErrors": [
+    "Invalid email address",
+    "Email is required",
+    "Password must be at least 6 characters",
+    "Password is required",
+    "You must accept Keep me signed in",
+    "First name is required",
+    "Last name is required"
+  ],
+
+  "placeholders": ["First Name", "Last Name", "Email", "Password"],
+
+  "Languages": {
+    "en": "English",
+    "ru": "Russian",
+    "am": "Armenian"
+  },
+
+  "LoginPage": {
+    "metaData": {
+      "title": "Login Page - A&V Sites",
+      "description": "This is a login page for A&V Sites"
+    },
+    "title": "Login to Your Account",
+    "text": "Or, login with your email",
+    "keepSignedIn": "Keep me signed in",
+    "forgotPassword": "Forgot password?",
+    "dontHaveAccount": "Don't have an account?"
+  },
+
+  "RegisterPage": {
+    "metaData": {
+      "title": "Register Page - A&V Sites",
+      "description": "This is the registration page for A&V Sites"
+    },
+    "title": "Create an Account",
+    "text": "Or register with your email",
+    "keepSignedIn": "Stay signed in",
+    "alreadyHaveAccount": "Already have an account"
+  },
+
+  "HomePage": {
+    "banner": {
+      "title": "Create Your Website in Just a Few Minutes",
+      "description": "Choose from our ready-made templates—no programming knowledge required. Easy, fast, and efficient—the best solution to showcase your business online.",
+      "illustrationText": "People are creating web pages by uploading images and files in the interface"
+    },
+
+    "ourFeatures": {
+      "title": "Our Features",
+      "subTitle": "Everything you need to create and manage a modern website",
+      "features": [
+        {
+          "title": "Modern Templates",
+          "description": "Choose from professionally designed templates suitable for any business."
+        },
+        {
+          "title": "Purchase or Subscription",
+          "description": "Get your template with a one-time purchase or benefit from a subscription plan."
+        },
+        {
+          "title": "Admin Dashboard",
+          "description": "Each template includes a convenient and complete admin dashboard to easily manage your content and settings."
+        },
+        {
+          "title": "Simplified Customization",
+          "description": "Adjust colors, images, and content without any coding skills."
+        },
+        {
+          "title": "Powerful Functionality",
+          "description": "Our templates come with essential tools—blog management, online store, payment systems, and more."
+        },
+        {
+          "title": "Regular Updates",
+          "description": "Receive free and regular updates to always have new features and improved security."
+        }
+      ]
+    },
+
+    "aboutSection": {
+      "title": "A solution for every business",
+      "description": "A&V Sites is a platform for those who want to save time and get high-quality results quickly. Choose a template, customize it to match your brand, and create a complete website in just a few steps.",
+      "features": [
+        "Fast loading and SEO optimization",
+        "Clean design and user-friendly interface",
+        "Simple management tools — no coding required"
+      ],
+      "illustrationText": "A person standing and holding a large web page interface, symbolizing web development or website creation"
+    },
+
+    "featuresTabSection": {
+      "tabs": {
+        "tab1": {
+          "title": "Clean and Modern Design",
+          "subTitle": "Not just beautiful, but purposeful design",
+          "description": "Our templates feature professional and responsive design suitable for any device. All websites are built with clean code and load quickly.",
+          "illustrationText": "An animated-style illustration of a businesswoman standing in front of screens and smartphones, showcasing a web or app interface, with graphic elements in green and black tones."
+        },
+        "tab2": {
+          "title": "All Necessary Pages Ready to Use",
+          "subTitle": "Everything you need to showcase your online business",
+          "description": "Includes essential business pages: Home, About Us, Services, Contact, Blog, and more. Simply choose a design and start working.",
+          "illustrationText": "A graphic illustration showing two web page layouts with green borders and a white background. One page features a profile image with a green background and face, along with three gray rectangles for information, while the other page contains several small rectangles. The overall background is light gray with dotted patterns."
+        },
+        "tab3": {
+          "title": "Admin System and Full Control",
+          "subTitle": "Complete control at your fingertips",
+          "description": "After subscribing, you get an admin panel where you can independently edit texts, images, and colors without any programming knowledge.",
+          "illustrationText": "A graphic illustration showing a monitor displaying a green line chart and a bar chart indicating data growth, as well as a pie chart and a list in green and black colors. The monitor is set against a light gray background."
+        }
+      }
+    },
+
+    "frequentlyAskedQuestions": {
+      "title": "Frequently Asked Questions",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is this platform?",
+          "answer": "This is a website creation platform that allows you to quickly build a professional business website using ready-made templates, without any programming knowledge."
+        },
+        {
+          "id": 2,
+          "question": "Do I need programming skills?",
+          "answer": "No. All templates are ready to use, and website management is done through a simple admin panel."
+        },
+        {
+          "id": 3,
+          "question": "How can I choose a template?",
+          "answer": "You can browse the list of templates, choose a design that fits your business type, and proceed with the purchase or subscription."
+        },
+        {
+          "id": 4,
+          "question": "What is included in the subscription plans?",
+          "answer": "Plans may include hosting, an admin system, technical support, and security updates."
+        },
+        {
+          "id": 5,
+          "question": "Can I buy a website without a subscription?",
+          "answer": "Yes. You can make a one-time purchase without monthly or yearly payments and receive a ready-made website with an admin system."
+        },
+        {
+          "id": 6,
+          "question": "When will I receive the website after purchase?",
+          "answer": "In most cases, the website is delivered immediately or within a very short time through an automated system."
+        },
+        {
+          "id": 7,
+          "question": "Can I manage the website myself?",
+          "answer": "Yes. Through the admin panel, you can edit texts, images, and contact details."
+        },
+        {
+          "id": 8,
+          "question": "Is technical support available?",
+          "answer": "Yes. Technical support is provided according to the plan you choose."
+        },
+        {
+          "id": 9,
+          "question": "Can I connect my own domain?",
+          "answer": "Yes. You can connect your own domain (for example, mybusiness.com)."
+        },
+        {
+          "id": 10,
+          "question": "Are the websites responsive?",
+          "answer": "Yes. All templates are fully responsive and work properly on mobile phones, tablets, and desktop computers."
+        }
+      ]
+    }
+  }
+}

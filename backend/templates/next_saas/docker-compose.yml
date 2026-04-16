@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Мы создадим этот Dockerfile ниже
+    container_name: ${SITE_DOMAIN:-nextjs-site}  # Имя контейнера на основе домена (можно передать env)
+    restart: unless-stopped
+    ports:
+      - "3000"  # Docker Compose сам выберет свободный хост-порт, но внутри контейнера всегда 3000
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    # Если у тебя есть .env файл с переменными (например, API ключи), добавь:
+    # env_file:
+    #   - .env.production

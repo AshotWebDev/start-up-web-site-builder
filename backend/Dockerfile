@@ -1,18 +1,23 @@
+# Базовый образ с Python
 FROM python:3.11
 
+# Рабочая директория внутри контейнера
 WORKDIR /backend
 
-COPY requirements.txt .
+RUN apt-get update && apt-get install -y docker-compose docker.io
 
+# Копируем и устанавливаем зависимости
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN python manage.py makemigrations
+# Устанавливаем celery и redis-клиент (если их нет в requirements.txt)
+RUN pip install celery redis
 
-RUN python manage.py migrate
-
+# Копируем весь проект
 COPY . .
 
+# Открываем порт Django
 EXPOSE 8000
 
+# Команда по умолчанию (можно переопределить в docker-compose)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
